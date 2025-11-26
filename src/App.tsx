@@ -1,35 +1,114 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/electron-vite.animate.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import TransferForm from './components/TransferForm'
 
-function App() {
-  const [count, setCount] = useState(0)
+// ===================================
+type Process = 'NONE' | 'TRANSFER'
+// ===================================
+
+export default function App() {
+  const [process, setProcess] = useState<Process>('NONE')
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    window.api.onNewTransfer(() => {
+      setProcess('TRANSFER')
+      setMenuOpen(false)
+    })
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://electron-vite.github.io" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div style={layout.container}>
+
+      <header style={layout.header}>
+        <div style={layout.logo}>DespacheJá</div>
+
+        <div style={{ position: 'relative' }}>
+          <button onClick={() => setMenuOpen(!menuOpen)}>Novo ▾</button>
+
+          {menuOpen && (
+            <div style={layout.dropdown}>
+              <button onClick={() => setProcess('TRANSFER')}>
+                Transferência de Veículo
+              </button>
+            </div>
+          )}
+        </div>
+      </header>
+
+      <main style={layout.main}>
+        {process === 'NONE' && <Welcome />}
+        {process === 'TRANSFER' && <TransferForm />}
+      </main>
+
+      <footer style={layout.footer}>
+        Pronto
+      </footer>
+
+    </div>
   )
 }
 
-export default App
+// ===================================
+
+function Welcome() {
+  return (
+    <div style={layout.welcome}>
+      <h2>Bem-vindo ao DespacheJá</h2>
+      <p>Selecione um processo no menu acima.</p>
+    </div>
+  )
+}
+
+// ===================================
+
+const layout: Record<string, React.CSSProperties> = {
+
+  container: {
+    display: 'grid',
+    gridTemplateRows: '50px 1fr 32px',
+    height: '100vh'
+  },
+
+  header: {
+    background: '#111423',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '0 20px',
+    borderBottom: '1px solid #252a41'
+  },
+
+  logo: {
+    fontWeight: 600,
+    letterSpacing: '.5px'
+  },
+
+  dropdown: {
+    position: 'absolute',
+    right: 0,
+    top: '36px',
+    background: '#161925',
+    border: '1px solid #252a41',
+    borderRadius: 6,
+    overflow: "hidden"
+  },
+
+  main: {
+    overflow: 'auto',
+    padding: 20
+  },
+
+  footer: {
+    background: '#111423',
+    borderTop: '1px solid #252a41',
+    padding: '5px 12px',
+    fontSize: 12,
+    color: '#9aa1b4'
+  },
+
+  welcome: {
+    textAlign: 'center',
+    marginTop: 80,
+    color: '#9aa1b4'
+  }
+}
