@@ -1,34 +1,26 @@
-import { app, BrowserWindow, Menu, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, Menu } from "electron";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { VehicleTransfer } from "../src/shared/transfer";
-
-// __dirname fix para ESModules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-let mainWindow: BrowserWindow | null = null;
-
-function createWindow(): void {
+const __filename$1 = fileURLToPath(import.meta.url);
+const __dirname$1 = path.dirname(__filename$1);
+let mainWindow = null;
+function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 720,
     webPreferences: {
-      preload: path.join(__dirname, "preload.mjs"),
-    },
+      preload: path.join(__dirname$1, "preload.mjs")
+    }
   });
-
   if (process.env.VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
     mainWindow.webContents.openDevTools();
   } else {
-    mainWindow.loadFile(path.join(__dirname, "../dist/index.html"));
+    mainWindow.loadFile(path.join(__dirname$1, "../dist/index.html"));
   }
-
   buildMenu();
 }
-
-function buildMenu(): void {
+function buildMenu() {
   const menu = Menu.buildFromTemplate([
     {
       label: "Novo",
@@ -37,40 +29,30 @@ function buildMenu(): void {
           label: "Transferência de Veículo",
           click: () => {
             mainWindow?.webContents.send("menu:new-transfer");
-          },
-        },
-      ],
-    },
+          }
+        }
+      ]
+    }
   ]);
-
   Menu.setApplicationMenu(menu);
 }
-
 app.whenReady().then(createWindow);
-
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
-
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
-
-// ✅ IPC estritamente tipado
-ipcMain.on("automation:start", (_event, data: VehicleTransfer) => {
+ipcMain.on("automation:start", (_event, data) => {
   console.log("🚗 Transferência recebida:");
-
   console.log("Comprador:", data.buyer.name);
   console.log("CPF:", data.buyer.cpf);
   console.log("Placa:", data.vehicle.plate);
   console.log("Valor:", data.vehicle.sale.declaredValue);
-
-  // Aqui entra Playwright / automação etc
 });
-
 ipcMain.handle("automation:status", async () => {
   return {
     status: "idle",
-    message: "Aguardando ação do usuário",
+    message: "Aguardando ação do usuário"
   };
 });
