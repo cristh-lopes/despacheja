@@ -1,0 +1,14 @@
+appId: com.seuapp.desktop
+productName: MeuApp
+directories:
+  output: dist
+files:
+  - "!backend/node_modules/playwright-core/.local-browsers/**"
+  - "electron/**/*"
+  - "frontend/out/**/*"
+  - "backend/**/*"
+win:
+  target: nsis
+extraResources:
+  - from: backend
+    to: backend
