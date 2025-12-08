@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { ModeToggle } from "./ui/mode-toggle";
 
 export interface SiteHeaderProps {
   pageName: string;
@@ -27,6 +28,7 @@ export function SiteHeader({ pageName }: SiteHeaderProps) {
               GitHub
             </a>
           </Button>
+          <ModeToggle />
         </div>
       </div>
     </header>
