@@ -10,6 +10,7 @@ import {
   IconFileDescription,
   IconFileWord,
   IconFolder,
+  IconForms,
   IconHelp,
   IconInnerShadowTop,
   IconListDetails,
@@ -42,8 +43,13 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
+    },
+    {
+      title: "Novo Serviço",
+      url: "/servicos",
+      icon: IconForms,
     },
     {
       title: "Lifecycle",
