@@ -82,6 +82,7 @@ import { DraggableRow } from "../ui/datatable/draggable-row";
 import { DragHandle } from "../ui/datatable/drag-handle";
 import { TableCellViewer } from "../ui/datatable/table-cell-viewer";
 import { FormEdit } from "./form-edit";
+import { NewServiceModal } from "./new-service-modal";
 
 export const schema = z.object({
   id: z.number(),
@@ -406,10 +407,12 @@ export function DataTable({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="outline" size="sm">
-            <IconPlus />
-            <span className="hidden lg:inline">Novo serviço</span>
-          </Button>
+          <NewServiceModal>
+            <Button variant="outline" size="sm">
+              <IconPlus />
+              <span className="hidden lg:inline">Novo serviço</span>
+            </Button>
+          </NewServiceModal>
         </div>
       </div>
       <TabsContent
