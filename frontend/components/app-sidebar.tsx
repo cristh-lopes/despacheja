@@ -2,25 +2,18 @@
 
 import * as React from "react";
 import {
-  IconCamera,
+  IconBuildingCog,
+  IconCashRegister,
   IconChartBar,
   IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
   IconForms,
   IconHelp,
   IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
   IconSearch,
   IconSettings,
-  IconUsers,
+  IconUserSearch,
 } from "@tabler/icons-react";
 
-import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
@@ -33,12 +26,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
+import { HorizontalLogo } from "./logo-horizontal";
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Cristhian Despachante",
+    email: "cristhian.despachate@gmail.com",
+    avatar: "/logoDespachante.png",
   },
   navMain: [
     {
@@ -47,111 +42,46 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Novo Serviço",
+      title: "Serviços",
       url: "/servicos",
       icon: IconForms,
     },
     {
-      title: "Lifecycle",
+      title: "Despesas",
       url: "#",
-      icon: IconListDetails,
+      icon: IconCashRegister,
     },
     {
-      title: "Analytics",
+      title: "Clientes",
+      url: "#",
+      icon: IconUserSearch,
+    },
+    {
+      title: "Análise",
       url: "#",
       icon: IconChartBar,
     },
     {
-      title: "Projects",
+      title: "Seu Negócio",
       url: "#",
-      icon: IconFolder,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: IconUsers,
-    },
-  ],
-  navClouds: [
-    {
-      title: "Capture",
-      icon: IconCamera,
-      isActive: true,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Proposal",
-      icon: IconFileDescription,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Prompts",
-      icon: IconFileAi,
-      url: "#",
-      items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
-      ],
+      icon: IconBuildingCog,
     },
   ],
   navSecondary: [
     {
-      title: "Settings",
+      title: "Configurações",
       url: "#",
       icon: IconSettings,
     },
     {
-      title: "Get Help",
+      title: "Posso ajudar?",
       url: "#",
       icon: IconHelp,
     },
     {
-      title: "Search",
+      title: "Pesquisar",
       url: "#",
       icon: IconSearch,
-    },
-  ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: IconDatabase,
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: IconReport,
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: IconFileWord,
     },
   ],
 };
@@ -176,7 +106,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
+        {/* <NavDocuments items={data.documents} /> */}
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
