@@ -7,8 +7,8 @@ export function HorizontalLogo() {
     <Image
       src={
         theme == "light"
-          ? "logo-horizontal-light.svg"
-          : "logo-horizontal-dark.svg"
+          ? "/logo-horizontal-light.svg"
+          : "/logo-horizontal-dark.svg"
       }
       alt="Logo Horizontal" 
       fill
