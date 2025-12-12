@@ -427,7 +427,7 @@ export default function TransferForm() {
                     render={({ field }) => (
                       <Select
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        value={field.value}
                       >
                         <SelectTrigger>
                           <SelectValue />
@@ -457,7 +457,7 @@ export default function TransferForm() {
                     render={({ field }) => (
                       <Select
                         onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        value={field.value}
                       >
                         <SelectTrigger>
                           <SelectValue />
