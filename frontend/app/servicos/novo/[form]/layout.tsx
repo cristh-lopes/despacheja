@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SiteHeader } from "@/components/site-header";
+import { Footer } from "@/components/ui/footer";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 export default function FormLayout({
@@ -19,9 +20,10 @@ export default function FormLayout({
         <SiteHeader pageName="Novo Serviço" />
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                {children}
+            <div className="flex flex-col gap-4 pt-4 pb-2 md:gap-6 md:pt-6">
+              {children}
             </div>
+            <Footer />
           </div>
         </div>
       </SidebarInset>
